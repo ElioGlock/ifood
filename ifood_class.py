@@ -39,26 +39,45 @@ class Ielio:
                     self.driver.find_element(By.XPATH,"//*[contains(text(),'Entrar ou cadastrar')]").click()
                     self.driver.find_element(By.XPATH,"//*[contains(text(),'E-mail')]").click()
                     self.driver.find_element(By.NAME,"email").send_keys("ifoood061@gmail.com"+Keys.ENTER)
+                    break
                 except: pass
-                    
+                
+            try:
+                time.sleep(5)
+                host = "imap.gmail.com"
+                mail = Imbox(host,username=self.email,password=self.senha)
 
-try:
-    time.sleep(5)
-    senha  = open(os.path.join("passwords","password_gmail"),"r").read()
-    email = "ifoood061@gmail.com"
-    host = "imap.gmail.com"
-    mail = Imbox(host,username=email,password=senha)
+                while True:
+                    msg_ifood = mail.messages(sent_from = "naoresponder@login.ifood.com.br",date__gt = date.today())
+                    msg_list =[msg for uid, msg in msg_ifood]
+                    if msg_list == None:
+                        print("O codigo de acesso não foi enviado")
+                        self.driver.find_element(By.XPATH,"//*[contains(text(),'Não recebi meu código')]").click()
+                        self.driver.find_element(By.XPATH,"//*[contains(text(),'reenvidar código')]").click()
+                        continue
+                    else:
+                        title = msg_list[-1].subject
+                        if "é o seu código de acesso" in title:
+                            list_code=[]
+                            for n, code in enumerate(title[:6]):
+                                self.driver.find_element(By.ID,f"otp-input-{n}").send_keys(code)
+                                list_code.append(code)
+                            print(list_code)
+                        else:continue
+                    try:
+                        time.sleep(1.5)
+                        self.driver.find_element(By.XPATH,"//*[contains(text(),'Código expirado')]")
+                        for n in range(6):self.driver.find_element(By.ID,f"otp-input-{n}").send_keys(Keys.BACKSPACE)
+                    except:break
+            except Exception as e: print("ERRO: " + e)
 
-    while True:
-        msg_ifood = mail.messages(sent_from = "naoresponder@login.ifood.com.br",date__gt = date.today())
-        msg_list =[msg for uid, msg in msg_ifood]
-        if msg_list == None:
-            print("O codigo de acesso não foi enviado")
-            driver.find_element(By.XPATH,"//*[contains(text(),'Não recebi meu código')]").click()
-            driver.find_element(By.XPATH,"//*[contains(text(),'reenvidar código')]").click()
-            continue
-        else:
-            tit
-        pass
-except Exception as e: print("ERRO: " + e)
-        
+            while True:
+                try:self.driver.find_elemtne(By.CSS_SELECTOR,"[aria-label=Casa]").click();break
+                except: time.sleep(5)         
+
+        self.ini_ifood = Thread(target=open_ifood,args=(self,))
+        self.ini_ifood.start()
+
+    
+
+    
