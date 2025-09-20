@@ -39,6 +39,7 @@ class Ielio:
                     self.driver.find_element(By.XPATH,"//*[contains(text(),'Entrar ou cadastrar')]").click()
                     self.driver.find_element(By.XPATH,"//*[contains(text(),'E-mail')]").click()
                     self.driver.find_element(By.NAME,"email").send_keys("ifoood061@gmail.com"+Keys.ENTER)
+                    
                     break
                 except: pass
                 
