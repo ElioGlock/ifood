@@ -74,7 +74,8 @@ class Ielio:
 
             while True:
                 try:self.driver.find_elemtne(By.CSS_SELECTOR,"[aria-label=Casa]").click();break
-                except: time.sleep(5)         
+                except: time.sleep(5)
+                print("okay")         
 
         self.ini_ifood = Thread(target=open_ifood,args=(self,))
         self.ini_ifood.start()
