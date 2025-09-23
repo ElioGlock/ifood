@@ -63,7 +63,6 @@ class Ielio:
                             for n, code in enumerate(title[:6]):
                                 self.driver.find_element(By.ID,f"otp-input-{n}").send_keys(code)
                                 list_code.append(code)
-                            print(list_code)
                         else:continue
                     try:
                         time.sleep(1.5)
@@ -73,7 +72,7 @@ class Ielio:
             except Exception as e: print("ERRO: " + e)
 
             while True:
-                try:self.driver.find_elemtne(By.CSS_SELECTOR,"[aria-label=Casa]").click();break
+                try:self.driver.find_element(By.CSS_SELECTOR,"[aria-label=Casa]").click();break
                 except: time.sleep(5)
                 print("okay")         
 
