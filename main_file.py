@@ -15,8 +15,9 @@ def quit_check(ali):
 
 keyboard.wait("f10")
 
-ali =Alicia()
+ali = Alicia()
 t = Thread(target=quit_check,args=(ali,))
 t.start()
 
 ifood = Ielio("ifoood061@gmail.com")
+# ifood.initialize_ifood()

@@ -21,7 +21,6 @@ class Ielio:
         self.email = email
         self.passowrds = open(os.path.join("passwords","password_gmail"),"r").read()
         self.valor_final = 0 
-        self.retorno = []
 
         self.initialize_ifood()
 

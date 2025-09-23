@@ -72,10 +72,6 @@ class Alicia:
 
 
 
-        
-ali = Alicia()
-
-
 
 
 
